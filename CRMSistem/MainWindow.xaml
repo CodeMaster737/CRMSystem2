@@ -1,0 +1,98 @@
+﻿<Window x:Class="CRMSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CRM System" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая панель с навигацией -->
+        <StackPanel Grid.Column="0" Background="LightGray">
+            <Button Content="Клиенты" Margin="5" Click="ButtonClients_Click"/>
+            <Button Content="Сделки" Margin="5" Click="ButtonDeals_Click"/>
+            <Button Content="Взаимодействия" Margin="5" Click="ButtonInteractions_Click"/>
+            <Button Content="Задачи" Margin="5" Click="ButtonTasks_Click"/>
+            <Button Content="Рассылки" Margin="5" Click="ButtonMailings_Click"/>
+        </StackPanel>
+
+        <!-- Правая панель с контентом -->
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхняя панель с фильтрами и поиском -->
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <TextBox Margin="5" Width="150" Text="Поиск"/>
+                <ComboBox Margin="5" Width="150" SelectedIndex="0">
+                    <ComboBoxItem>Все</ComboBoxItem>
+                    <ComboBoxItem>Активные</ComboBoxItem>
+                    <ComboBoxItem>Завершенные</ComboBoxItem>
+                </ComboBox>
+                <Button Content="Фильтр" Margin="5"/>
+            </StackPanel>
+
+            <!-- Основная область контента -->
+            <TabControl Grid.Row="1" Margin="5">
+                <!-- Вкладка для клиентов -->
+                <TabItem Header="Клиенты">
+                    <DataGrid x:Name="ClientsDataGrid" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <!-- Вкладка для сделок -->
+                <TabItem Header="Сделки">
+                    <DataGrid x:Name="DealsDataGrid" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                            <DataGridTextColumn Header="Стоимость" Binding="{Binding Amount}"/>
+                            <DataGridTextColumn Header="Дата создания" Binding="{Binding CreatedAt}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <!-- Вкладка для взаимодействий -->
+                <TabItem Header="Взаимодействия">
+                    <DataGrid x:Name="InteractionsDataGrid" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Тип" Binding="{Binding Type}"/>
+                            <DataGridTextColumn Header="Дата" Binding="{Binding Date}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <!-- Вкладка для задач -->
+                <TabItem Header="Задачи">
+                    <DataGrid x:Name="TasksDataGrid" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                            <DataGridTextColumn Header="Срок выполнения" Binding="{Binding DueDate}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
+                <!-- Вкладка для рассылок -->
+                <TabItem Header="Рассылки">
+                    <DataGrid x:Name="MailingsDataGrid" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Тема" Binding="{Binding Subject}"/>
+                            <DataGridTextColumn Header="Получатели" Binding="{Binding Recipients}"/>
+                            <DataGridTextColumn Header="Дата отправки" Binding="{Binding SendDate}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>
